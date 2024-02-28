@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Create new homepage banner",
+      "detail": "Lorem",
+      "complete": false
+    },
+    {
+      "id": 2,
+      "title": "A new About",
+      "detail": "Lorem",
+      "complete": true
+    }
+  ]
+}
