@@ -2,13 +2,12 @@
   <div class="home">
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <SingleProject :project="project" />
+        <SingleProject :project="project" @delete="handleDelete" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import data from "../../data/db.json";
 import SingleProject from "@/components/SingleProject.vue";
 export default {
   components: { SingleProject },
@@ -18,7 +17,25 @@ export default {
     };
   },
   mounted() {
-    this.projects = data.projects;
+    this.loadData();
+  },
+  methods: {
+    loadData() {
+      fetch("http://localhost:3000/projects")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.projects = data;
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error("Error:", error);
+        });
+    },
+    handleDelete(id) {
+      this.projects = this.projects.filter((project) => project.id !== id);
+    },
   },
 };
 </script>
